@@ -1,17 +1,15 @@
 {
-  "homepage": "http://kaksv.github.io/daunter",
+  
   "name": "rainbow2",
   "private": true,
   "version": "0.1.0",
   "scripts": {
     "dev": "next dev",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
   },
-  "dependencies": {
+  "dependencies": {   
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
     "@mui/icons-material": "^5.14.1",
