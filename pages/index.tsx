@@ -105,6 +105,7 @@ const Home: NextPage = () => {
         
 
        {/* End of Navigation Bar */}
+       
        <div>
        
         {/* <h1>Products</h1> */}
@@ -116,6 +117,8 @@ const Home: NextPage = () => {
             
             <img src={product.image } alt={product.name} />
             <p>{product.description}</p>
+            <button className={styles.btnbuy} role='button'> Buy at {product.price} USD with EVM Token</button>
+
           </div>
          ))}
         </div>
