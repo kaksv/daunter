@@ -6,6 +6,18 @@ import Navbar from './components/uis/navbar';
 import {useState, useEffect} from 'react';
 import  '../styles/mainbody.module.css';
 
+import marketplaceAbi from './contract/marketplace.abi.json';
+import { newKitFromWeb3 } from '@celo/contractkit';
+import {BigNumber} from "bignumber.js";
+import Web3 from 'web3';
+
+const ERC20_DECIMALS = 18
+const mydeployedcontractAddress = '0x9A1eaf5F9D227C8a71b16b3703ACb60aA6eAf544'
+
+let contract
+let produce
+
+
 
 
 const products = [
@@ -65,11 +77,27 @@ const Home: NextPage = () => {
       
   }, [])
   
+  
+
+  const web3 = new Web3("https://celo-alfajores.infura.io/v3/197cf23745d64339aea08f173a24eb76" );
+  const contract = new web3.eth.Contract(marketplaceAbi, mydeployedcontractAddress)
+  // const kit = newKitFromWeb3(web3);
 
 
+  const postProducts = async function(name: any, image: any, _description: any, _location: any, price: any ){
+    const accounts = await web3.eth.getAccounts()
+    const requiredAccount = accounts[0]
 
+  }
+  const getProducts = async function() {
+    const _productsLength = await contract.methods.getProductsLength().call()
+    const _products = []
+
+    //  I wanted to use for (let i = 0; i<_productsLength; )
+  }
   return (
     <>
+    
     <div className={styles.container}>
       {/* Header Section */}
       <Head >
@@ -106,7 +134,8 @@ const Home: NextPage = () => {
 
        {/* End of Navigation Bar */}
        
-       <div>
+       
+      <div>
        
         {/* <h1>Products</h1> */}
         <div className={styles.wrappergrid}>

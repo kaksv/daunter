@@ -50,6 +50,12 @@ import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import MenuIcon from '@mui/icons-material/Menu';
 import useScrollTrigger from '@mui/material/useScrollTrigger';
+import btnstyles from '/styles/Home.module.css';
+import { useState } from 'react';
+import postpopup from '/styles/productpost.module.css';
+
+
+// For the Popup form to display whenever the Add product button is clicked.
 
 const StyledAppBar = styled(AppBar)({
     marginBottom: '10px',
@@ -67,8 +73,55 @@ const StyledTypography = styled(Typography)({
   fontWeight: 'bold',
 });
 
+
+function PostProduct(props: any) {
+  const [productname, setProductname] = useState('')
+  const [imageUrl, setImageUrl] = useState('')
+  const [location, setLocation] = useState('')
+  const [price, setPrice] = useState('')
+
+  function handlePostProduct(e: { preventDefault: () => void; }) {
+    
+    props.toggle()
+  }
+  return(
+    <div className={postpopup.popup}>
+        <div className={postpopup.popupinner}>
+            <h2>Add Product</h2>
+            <form onSubmit={handlePostProduct}>
+                <label>
+                  Product Name: 
+                  <input type='text' value={productname} onChange={e =>setProductname(e.target.value)} />
+                </label>
+                <label>
+                  Image Link: 
+                  <input type='text' value={imageUrl} onChange={e =>setImageUrl(e.target.value)} />
+                </label>
+                <label>
+                  Location: 
+                  <input type='text' value={location} onChange={e =>setLocation(e.target.value)} />
+                </label>
+                <label>
+                  Price: 
+                  <input type='text' value={price} onChange={e =>setPrice(e.target.value)} />
+                  
+                </label>
+                <button type='submit'>Add product</button>
+            </form>
+            <button onClick={props.toggle}>Close</button>
+        </div>
+    </div>
+  );
+}
 export default function NavigationBar() {
   const trigger = useScrollTrigger();
+
+  const[seen, setSeen] = useState(false)
+   
+    function togglePop(){
+      setSeen(!seen);
+    }
+  
 
   return (
     
@@ -80,9 +133,12 @@ export default function NavigationBar() {
         <StyledTypography variant="h6" >
           
         </StyledTypography>
-        {/* <Typography variant="h6" component="div">
-          About
-        </Typography> */}
+        <Typography variant="h6" component="div">
+      <div>
+        <button className={btnstyles.btnbuy} role='button' onClick={togglePop}> Add a Product for sell</button>
+        {seen ? <PostProduct toggle={togglePop} /> : null}
+      </div>
+        </Typography>
         <Typography variant="h6" component="div">
           <ConnectButton />
         </Typography>

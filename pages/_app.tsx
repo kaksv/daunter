@@ -15,6 +15,7 @@ import {
   zora,
 } from 'wagmi/chains';
 import { publicProvider } from 'wagmi/providers/public';
+import marketplaceAbi from './contract/marketplace.abi.json';
 
 const { chains, publicClient, webSocketPublicClient } = configureChains(
   [
